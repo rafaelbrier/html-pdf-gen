@@ -1,10 +1,16 @@
 doctype html
 html
-  head
-    title= pageName
-    <link rel='stylesheet' href='#{stylesheet}'/>
-  body
-    ol#books
-      for book in books
-        if book.available
-          li #{book.name} for #{book.price} €
+	head
+		title=	pdfName
+		<link rel='stylesheet' href='#{stylesheet}'/>
+	body
+		div#header-right 
+			<img src='#{logoBB}' />
+		div#header-left	BLAWSBLAWS
+    
+	div.page
+		for book in books
+			if book.available
+				p #{book.name} for #{book.price} €
+				
+	div#footer	Um Footer qualquer
