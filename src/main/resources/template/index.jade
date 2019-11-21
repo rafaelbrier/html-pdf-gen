@@ -1,0 +1,10 @@
+doctype html
+html
+  head
+    title= pageName
+    <link rel='stylesheet' href='#{stylesheet}'/>
+  body
+    ol#books
+      for book in books
+        if book.available
+          li #{book.name} for #{book.price} €
