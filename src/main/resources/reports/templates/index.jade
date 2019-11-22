@@ -1,0 +1,111 @@
+doctype html
+html
+	head
+		title=	pdfName
+		<meta content='text/html' charset='UTF-8' />
+		<link rel='stylesheet' href='#{stylesheet}'/>
+	body
+		<!-- Header Logo -->
+		div#header-right 
+			<img src='#{headerData.headerLogo}' />
+		
+		<!-- Header Text -->
+		div#header-left
+			div.header-data
+				for headerText in headerData.headerTextList
+					div.header-text 
+						if headerText.isBold 
+							b #{headerText.text}
+						else
+							div #{headerText.text}		
+			div.horizontal-line
+												
+		<!-- Footer Text -->
+		div#footer	Um Footer qualquer
+		
+		<!-- Content -->
+		div.content
+			<!-- First Block -->
+			div.simple-margin 
+				b Prezado Cliente,
+			div.simple-margin Segue abaixo o resumo de sua cotação.
+			div
+				b BB SEGURO FATURAMENTO
+				
+			<!-- Simulacao Block -->
+			div.block
+				div.block-header
+					b Nº DA SIMULAÇÂO - 
+					span #{simulacaoBlockData.codigoCotacao}
+				
+				div.item-block
+					div.item
+						div.item-label Data da Simulação
+						div.item-value #{simulacaoBlockData.dataSimulacao}
+					div.item
+						div.item-label Validade
+						div.item-value #{simulacaoBlockData.dataValidade}
+						
+			<!-- Dados Solicitante Block -->
+			div.block
+				div.block-header
+					b DADOS DO SOLICITANTE
+				
+				div.item-block.medium-margin
+					div.item
+						div.item-label Nome/Empresa
+						div.item-value #{dadosSolicitanteBlockData.nomeEmpresa}
+					div.item
+						div.item-label CPF/CNPJ
+						div.item-value #{dadosSolicitanteBlockData.cpfCnpj}
+					div.item
+						div.item-label Telefone
+						div.item-value #{dadosSolicitanteBlockData.telefone}
+						
+				div.item-block.medium-margin
+					div.item
+						div.item-label E-mail
+						div.item-value #{dadosSolicitanteBlockData.email}
+					div.item
+						div.item-label Agência de Relacionamento
+						div.item-value #{dadosSolicitanteBlockData.agenciaRelacionamento}
+					div.item
+						div.item-label Nome da Agência
+						div.item-value #{dadosSolicitanteBlockData.nomeAgencia}
+						
+				div.item-block
+					div.item
+						div.item-label Telefone Adicional
+						div.item-value #{dadosSolicitanteBlockData.telefoneAdicional}
+				
+			<!-- Combo Block -->
+			div.block
+				div.block-half
+					div.block-header
+						b #{comboBlockData.nomeCombo}
+					
+					div.item-block.medium-margin
+						div.item
+							div.item-label Bens dados em garantia de crédito rural
+							div.item-value #{comboBlockData.parcelasBemEmGarantia}
+					div.item-block
+						div.item
+							div.item-label Bens não dados em garantia de crédito rural
+							div.item-value #{comboBlockData.parcelasBemNaoGarantia}
+				div.block-half
+					div.combo-box
+						div.block-header
+							b VALOR DO COMBO
+							
+						div.preco-container
+							div.preco.total R$ 800,00
+								
+							div.preco.desconto R$ 720,00
+						
+						
+			
+				
+			for book in books
+				if book.available
+					div #{book.name} for #{book.price} €
+				

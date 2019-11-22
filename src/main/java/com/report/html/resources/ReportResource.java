@@ -1,7 +1,7 @@
 package com.report.html.resources;
 
 import java.io.IOException;
-import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,15 +9,23 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
+import com.report.html.datasources.ComboBlockData;
+import com.report.html.datasources.DadosSolicitanteBlockData;
+import com.report.html.datasources.HeaderData;
+import com.report.html.datasources.SimulacaoBlockData;
 import com.report.html.models.Book;
 
-import de.neuland.jade4j.Jade4J;
+import de.neuland.jade4j.Jade4J.Mode;
+import de.neuland.jade4j.JadeConfiguration;
+import de.neuland.jade4j.template.FileTemplateLoader;
+import de.neuland.jade4j.template.TemplateLoader;
 
 @Controller
 @RequestMapping("report")
@@ -32,30 +40,65 @@ public class ReportResource {
 			books.add(new Book("The Hitchhiker's Guide to the Galaxy", 5.70, true));
 		}
 
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("stylesheet", getClass().getResource("/template/index.css").toString());
-		model.put("logoBB", getClass().getResource("/template/assets/LogoBB.png").toString());
-		model.put("books", books);
-		model.put("pdfName", FILE_NAME);
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		setBasicParameters(parameters);
+		setHeaderData(parameters);
+		setSimulacaoBlockData(parameters);
+		setDadosSolicitanteBlockData(parameters);
+		setComboBlockData(parameters);
+		parameters.put("books", books);
 
-		String html = Jade4J.render(getClass().getResource("/template/index.jade"), model);
-		buildAndExportPdf(response, html, "", FILE_NAME);
-
+		JadeConfiguration jadeConfig = getJadeConfiguration();
+		String html = jadeConfig.renderTemplate(jadeConfig.getTemplate("index"), parameters);
+		String unescapedHtml = StringEscapeUtils.unescapeHtml4(html);
+		buildAndExportPdf(response, unescapedHtml, FILE_NAME);
 	}
 
-	protected void buildAndExportPdf(HttpServletResponse response, String html, String htmlContentPath, String fileName)
-			throws IOException {
+	private void setBasicParameters(Map<String, Object> parameters) {
+		parameters.put("stylesheet", getClass().getResource("/reports/assets/index.css").toString());
+		parameters.put("pdfName", FILE_NAME);
+	}
+
+	private void setHeaderData(Map<String, Object> parameters) {
+		parameters.put("headerData", new HeaderData());
+	}
+
+	private void setSimulacaoBlockData(Map<String, Object> parameters) {
+		parameters.put("simulacaoBlockData", new SimulacaoBlockData("156201911000079", "31/05/1995", "31/05/2021"));
+	}
+
+	private void setDadosSolicitanteBlockData(Map<String, Object> parameters) {
+		parameters.put("dadosSolicitanteBlockData", new DadosSolicitanteBlockData("EDER CHERUTTI", "315.586.458.37",
+				"(11) 11111-1111", "echerute@brasilseg.csadasdadsadsadsom", "5116", "EMPR.GOIANIA", "(55) 11989 3759"));
+	}
+
+	private void setComboBlockData(Map<String, Object> parameters) {
+		parameters.put("comboBlockData",
+				new ComboBlockData("Combo Ideal", "R$ 800,00", "R$ 720,00", "4x R$ 420,00", "4x R$ 380,00"));
+	}
+
+	protected void buildAndExportPdf(HttpServletResponse response, String html, String fileName) throws IOException {
 		response.setContentType(MediaType.APPLICATION_PDF_VALUE);
 		response.setHeader("Content-disposition", "inline; filename=" + fileName + ".pdf");
 		try {
 			PdfRendererBuilder builder = new PdfRendererBuilder();
-//			builder.useFastMode();
-			builder.withHtmlContent(html, htmlContentPath);
+			builder.useFastMode();
+			builder.withHtmlContent(html, "");
 			builder.toStream(response.getOutputStream());
 			builder.run();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private JadeConfiguration getJadeConfiguration() {
+		JadeConfiguration jadeConfig = new JadeConfiguration();
+		TemplateLoader loader = new FileTemplateLoader(getClass().getResource("/reports/templates/").getPath(),
+				StandardCharsets.UTF_8.name(), ".jade");
+		jadeConfig.setTemplateLoader(loader);
+		jadeConfig.setPrettyPrint(true);
+		jadeConfig.setMode(Mode.XHTML);
+		return jadeConfig;
 	}
 
 }
