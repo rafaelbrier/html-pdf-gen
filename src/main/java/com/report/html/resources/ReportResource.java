@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import com.report.html.datasources.ComboBlockData;
 import com.report.html.datasources.DadosSolicitanteBlockData;
+import com.report.html.datasources.FooterData;
 import com.report.html.datasources.HeaderData;
 import com.report.html.datasources.SimulacaoBlockData;
 import com.report.html.models.Book;
@@ -43,24 +44,29 @@ public class ReportResource {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		setBasicParameters(parameters);
 		setHeaderData(parameters);
+		setFooterData(parameters);
 		setSimulacaoBlockData(parameters);
 		setDadosSolicitanteBlockData(parameters);
 		setComboBlockData(parameters);
 		parameters.put("books", books);
 
 		JadeConfiguration jadeConfig = getJadeConfiguration();
-		String html = jadeConfig.renderTemplate(jadeConfig.getTemplate("index"), parameters);
+		String html = jadeConfig.renderTemplate(jadeConfig.getTemplate("page1.jade"), parameters);
 		String unescapedHtml = StringEscapeUtils.unescapeHtml4(html);
 		buildAndExportPdf(response, unescapedHtml, FILE_NAME);
 	}
 
 	private void setBasicParameters(Map<String, Object> parameters) {
-		parameters.put("stylesheet", getClass().getResource("/reports/assets/index.css").toString());
+		parameters.put("commonStyleSheet", getClass().getResource("/reports/assets/common.css").toString());
 		parameters.put("pdfName", FILE_NAME);
 	}
 
 	private void setHeaderData(Map<String, Object> parameters) {
 		parameters.put("headerData", new HeaderData());
+	}
+
+	private void setFooterData(Map<String, Object> parameters) {
+		parameters.put("footerData", new FooterData());
 	}
 
 	private void setSimulacaoBlockData(Map<String, Object> parameters) {
@@ -74,7 +80,7 @@ public class ReportResource {
 
 	private void setComboBlockData(Map<String, Object> parameters) {
 		parameters.put("comboBlockData",
-				new ComboBlockData("Combo Ideal", "R$ 800,00", "R$ 720,00", "4x R$ 420,00", "4x R$ 380,00"));
+				new ComboBlockData("Combo Ideal", "800,00", "720", "00", "4x R$ 420,00", "4x R$ 380,00"));
 	}
 
 	protected void buildAndExportPdf(HttpServletResponse response, String html, String fileName) throws IOException {
@@ -94,7 +100,7 @@ public class ReportResource {
 	private JadeConfiguration getJadeConfiguration() {
 		JadeConfiguration jadeConfig = new JadeConfiguration();
 		TemplateLoader loader = new FileTemplateLoader(getClass().getResource("/reports/templates/").getPath(),
-				StandardCharsets.UTF_8.name(), ".jade");
+				StandardCharsets.UTF_8.name());
 		jadeConfig.setTemplateLoader(loader);
 		jadeConfig.setPrettyPrint(true);
 		jadeConfig.setMode(Mode.XHTML);

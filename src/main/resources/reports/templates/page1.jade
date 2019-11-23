@@ -3,7 +3,7 @@ html
 	head
 		title=	pdfName
 		<meta content='text/html' charset='UTF-8' />
-		<link rel='stylesheet' href='#{stylesheet}'/>
+		<link rel='stylesheet' href='#{commonStyleSheet}'/>
 	body
 		<!-- Header Logo -->
 		div#header-right 
@@ -21,16 +21,18 @@ html
 			div.horizontal-line
 												
 		<!-- Footer Text -->
-		div#footer	Um Footer qualquer
+		div#footer
+			div.footer-obs.simple-margin #{footerData.obsText}
+			div.footer-sac #{footerData.sacText}
 		
 		<!-- Content -->
 		div.content
 			<!-- First Block -->
 			div.simple-margin 
-				b Prezado Cliente,
-			div.simple-margin Segue abaixo o resumo de sua cotação.
+				b.f-18 Prezado Cliente,
+			div.medium-margin Segue abaixo o resumo de sua cotação.
 			div
-				b BB SEGURO FATURAMENTO
+				b.f-18 BB SEGURO FATURAMENTO
 				
 			<!-- Simulacao Block -->
 			div.block
@@ -79,8 +81,8 @@ html
 						div.item-value #{dadosSolicitanteBlockData.telefoneAdicional}
 				
 			<!-- Combo Block -->
-			div.block
-				div.block-half
+			div.block.page-break.no-border
+				div.combo-block
 					div.block-header
 						b #{comboBlockData.nomeCombo}
 					
@@ -92,20 +94,18 @@ html
 						div.item
 							div.item-label Bens não dados em garantia de crédito rural
 							div.item-value #{comboBlockData.parcelasBemNaoGarantia}
-				div.block-half
+							
+				div.combo-container
 					div.combo-box
 						div.block-header
 							b VALOR DO COMBO
 							
 						div.preco-container
-							div.preco.total R$ 800,00
+							div.preco.preco-margin 
+								div.total R$ #{comboBlockData.valorComboSemDesconto}
+								span.preco-por Por:
+								span.preco-cifrao   R$
 								
-							div.preco.desconto R$ 720,00
-						
-						
-			
-				
-			for book in books
-				if book.available
-					div #{book.name} for #{book.price} €
-				
+							div.preco.desconto.inteiro #{comboBlockData.valorComboComDescontoInteiro}
+							div.preco.desconto.decimal ,#{comboBlockData.valorComboComDescontoDecimal}
+							div.preco-anual anual

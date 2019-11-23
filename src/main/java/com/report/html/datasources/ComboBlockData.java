@@ -6,7 +6,8 @@ public class ComboBlockData {
 
 	private String nomeCombo;
 	private String valorComboSemDesconto;
-	private String valorComboComDesconto;
+	private String valorComboComDescontoInteiro;
+	private String valorComboComDescontoDecimal;
 	private String parcelasBemEmGarantia;
 	private String parcelasBemNaoGarantia;
 
@@ -14,12 +15,13 @@ public class ComboBlockData {
 		super();
 	}
 
-	public ComboBlockData(String nomeCombo, String valorComboSemDesconto, String valorComboComDesconto,
+	public ComboBlockData(String nomeCombo, String valorComboSemDesconto, String valorComboComDescontoInteiro, String valorComboComDescontoDecimal,
 			String parcelasBemEmGarantia, String parcelasBemNaoGarantia) {
 		super();
 		this.nomeCombo = nomeCombo;
 		this.valorComboSemDesconto = valorComboSemDesconto;
-		this.valorComboComDesconto = valorComboComDesconto;
+		this.valorComboComDescontoDecimal = valorComboComDescontoDecimal;
+		this.valorComboComDescontoInteiro = valorComboComDescontoInteiro;
 		this.parcelasBemEmGarantia = parcelasBemEmGarantia;
 		this.parcelasBemNaoGarantia = parcelasBemNaoGarantia;
 	}
@@ -40,12 +42,20 @@ public class ComboBlockData {
 		this.valorComboSemDesconto = valorComboSemDesconto;
 	}
 
-	public String getValorComboComDesconto() {
-		return valorComboComDesconto != null ? valorComboComDesconto : EMPTY;
+	public String getValorComboComDescontoInteiro() {
+		return valorComboComDescontoInteiro != null ? valorComboComDescontoInteiro : EMPTY;
 	}
 
-	public void setValorComboComDesconto(String valorComboComDesconto) {
-		this.valorComboComDesconto = valorComboComDesconto;
+	public void setValorComboComDescontoInteiro(String valorComboComDescontoInteiro) {
+		this.valorComboComDescontoInteiro = valorComboComDescontoInteiro;
+	}
+
+	public String getValorComboComDescontoDecimal() {
+		return valorComboComDescontoDecimal != null ? valorComboComDescontoDecimal : EMPTY; 
+	}
+
+	public void setValorComboComDescontoDecimal(String valorComboComDescontoDecimal) {
+		this.valorComboComDescontoDecimal = valorComboComDescontoDecimal;
 	}
 
 	public String getParcelasBemEmGarantia() {
