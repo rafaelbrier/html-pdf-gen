@@ -10,7 +10,7 @@
   width: 21cm;
   height: 29.7cm;
   background: white;
-  margin: 3cm 1cm 5cm 2cm;
+  margin: 3cm 1cm 5cm 1cm;
   padding-top: 20px;
   padding-bottom: 10px;
   
@@ -36,7 +36,6 @@
 #header-left {
   position: running(header-left);
   padding: 15px 0px;
-  margin-left: -1cm;
   }
 .header-text {
 	font-size: 12px;
@@ -45,13 +44,19 @@
 .header-text b, .header-text div {
 	line-height: 16px;
 }
+.header-line {
+	width: 19cm;
+	margin-top: 10px;
+	position: fixed;
+	height: 1px;
+	background-color: #e0e0e0;
+}
 /* Fim Header */
 /** 
  * Footer 
  */
 #footer {
   position: running(footer);
-  margin-left: -1cm;
 }
 #footer .footer-obs {
 	font-size: 12px;
@@ -79,12 +84,11 @@
 	text-align: center;
 }
 .horizontal-line {
-	width: 19cm;
-	margin-top: 10px;
-	left: -1cm;
+	margin-left: 0.7cm;
+	width: 18cm;
 	position: fixed;
-	background-color: #e0e0e0;
 	height: 1px;
+	background-color: #a1a1a1
 }
 .simple-margin {
 	margin-bottom: 15px;
@@ -103,9 +107,12 @@
 /** 
  * Bloco Simples 
  */
+ .first-block {
+	padding: 0 !important;
+ }
 .block {
-	padding: 18px 0px;
-	border-bottom: 1px solid #a1a1a1;
+	padding: 22px 0px 22px 0px;
+	margin-left: 1cm;
 }
 .block .block-header {
 	font-size: 22px;
@@ -129,67 +136,3 @@
 	font-weight: bold;
 }
 /* Fim Bloco Simples */
-/** 
- * Combo Box 
- */
-.combo-block {
-	width: 10cm;
-	display: inline-block;
-}
-.combo-container {
-	vertical-align: top;
-	text-align: center;
-	display: inline-block;
-}
-.combo-box {
-	vertical-align: top;
-	padding: 20px;
-	border: 3px solid #0951a3;
-}
-.combo-box .block-header {
-	text-align: center;
-}
-.combo-box .preco-container {
-	display: inline-block;
-}
-.combo-box .preco-container .preco {
-	display: inline-block;
-}
-.combo-box .preco-container .preco-margin {
-	margin-right: 10px;
-}
-.combo-box .preco-container .preco .total {
-	color: #757575;
-	line-heiht: 12px;
-	font-size: 14px;
-}
-.combo-box .preco-container .preco .preco-por {
-	margin-left: 10px;
-	color: #757575;
-	line-heiht: 14px;
-	font-size: 16px;
-}
-.combo-box .preco-container .preco .preco-cifrao {
-	margin-right: -5px;
-	color: #033656;
-	line-heiht: 24px;
-	font-size: 24px;
-}
-.combo-box .preco-container .desconto {
-	color: #033656;
-}
-.combo-box .preco-container .inteiro {
-	font-size: 50px;
-	font-weight: 800;
-}
-.combo-box .preco-container .decimal {
-	font-weight: bold;
-	font-size: 24px;
-}
-.combo-box .preco-anual {
-	text-align: right;
-	color: #033656;
-	font-weight: bold;
-	font-size: 20px;
-}
-/* Fim Combo Box */

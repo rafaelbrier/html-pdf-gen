@@ -1,0 +1,33 @@
+doctype html
+html
+	head
+		title=	pdfName
+		<meta content='text/html' charset='UTF-8' />
+		
+		<!-- Inclui StyleSheet Comun -->
+		<link rel='stylesheet' href='#{commonStyleSheet}'/>
+		<link rel='stylesheet' href='#{firstPageStyleSheet}'/>
+		
+	body
+		<!-- Header Logo -->
+		div#header-right 
+			<img src='#{headerData.headerLogo}' />
+		
+		<!-- Header Text -->
+		div#header-left
+			div.header-data
+				for headerText in headerData.headerTextList
+					div.header-text 
+						if headerText.isBold 
+							b #{headerText.text}
+						else
+							div #{headerText.text}		
+			div.header-line
+												
+		<!-- Footer Text -->
+		div#footer
+			div.footer-obs.simple-margin #{footerData.obsText}
+			div.footer-sac #{footerData.sacText}
+		
+		<!-- Inclui Primeira Página -->
+		include firstPage

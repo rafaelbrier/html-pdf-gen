@@ -1,0 +1,64 @@
+/** 
+ * Combo Box 
+ */
+.combo-block {
+	width: 10cm;
+	display: inline-block;
+}
+.combo-container {
+	vertical-align: top;
+	text-align: center;
+	display: inline-block;
+}
+.combo-box {
+	vertical-align: top;
+	padding: 20px;
+	border: 3px solid #0951a3;
+}
+.combo-box .block-header {
+	text-align: center;
+}
+.combo-box .preco-container {
+	display: inline-block;
+}
+.combo-box .preco-container .preco {
+	display: inline-block;
+}
+.combo-box .preco-container .preco-margin {
+	margin-right: 10px;
+}
+.combo-box .preco-container .preco .total {
+	color: #757575;
+	line-heiht: 12px;
+	font-size: 14px;
+}
+.combo-box .preco-container .preco .preco-por {
+	margin-left: 10px;
+	color: #757575;
+	line-heiht: 14px;
+	font-size: 16px;
+}
+.combo-box .preco-container .preco .preco-cifrao {
+	margin-right: -5px;
+	color: #033656;
+	line-heiht: 24px;
+	font-size: 24px;
+}
+.combo-box .preco-container .desconto {
+	color: #033656;
+}
+.combo-box .preco-container .inteiro {
+	font-size: 50px;
+	font-weight: 800;
+}
+.combo-box .preco-container .decimal {
+	font-weight: bold;
+	font-size: 24px;
+}
+.combo-box .preco-anual {
+	text-align: right;
+	color: #033656;
+	font-weight: bold;
+	font-size: 20px;
+}
+/* Fim Combo Box */

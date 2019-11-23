@@ -1,0 +1,90 @@
+<!-- Content -->
+div.content
+	<!-- First Block -->
+	div.block.first-block
+		div.simple-margin 
+			b.f-18 Prezado Cliente,
+		div.medium-margin Segue abaixo o resumo de sua cotação.
+		div
+			b.f-18 BB SEGURO FATURAMENTO
+		
+	<!-- Simulacao Block -->
+	div.block
+		div.block-header
+			b Nº DA SIMULAÇÂO - 
+			span #{simulacaoBlockData.codigoCotacao}
+		
+		div.item-block
+			div.item
+				div.item-label Data da Simulação
+				div.item-value #{simulacaoBlockData.dataSimulacao}
+			div.item
+				div.item-label Validade
+				div.item-value #{simulacaoBlockData.dataValidade}
+	div.horizontal-line
+	<!-- Simulacao Block -->
+					
+	<!-- Dados Solicitante Block -->
+	div.block
+		div.block-header
+			b DADOS DO SOLICITANTE
+		
+		div.item-block.medium-margin
+			div.item
+				div.item-label Nome/Empresa
+				div.item-value #{dadosSolicitanteBlockData.nomeEmpresa}
+			div.item
+				div.item-label CPF/CNPJ
+				div.item-value #{dadosSolicitanteBlockData.cpfCnpj}
+			div.item
+				div.item-label Telefone
+				div.item-value #{dadosSolicitanteBlockData.telefone}
+				
+		div.item-block.medium-margin
+			div.item
+				div.item-label E-mail
+				div.item-value #{dadosSolicitanteBlockData.email}
+			div.item
+				div.item-label Agência de Relacionamento
+				div.item-value #{dadosSolicitanteBlockData.agenciaRelacionamento}
+			div.item
+				div.item-label Nome da Agência
+				div.item-value #{dadosSolicitanteBlockData.nomeAgencia}
+				
+		div.item-block
+			div.item
+				div.item-label Telefone Adicional
+				div.item-value #{dadosSolicitanteBlockData.telefoneAdicional}
+	div.horizontal-line
+	<!-- Dados Solicitante Block -->
+		
+	<!-- Combo Block -->
+	div.block.page-break
+		div.combo-block
+			div.block-header
+				b #{comboBlockData.nomeCombo}
+			
+			div.item-block.medium-margin
+				div.item
+					div.item-label Bens dados em garantia de crédito rural
+					div.item-value #{comboBlockData.parcelasBemEmGarantia}
+			div.item-block
+				div.item
+					div.item-label Bens não dados em garantia de crédito rural
+					div.item-value #{comboBlockData.parcelasBemNaoGarantia}
+					
+		div.combo-container
+			div.combo-box
+				div.block-header
+					b VALOR DO COMBO
+					
+				div.preco-container
+					div.preco.preco-margin 
+						div.total R$ #{comboBlockData.valorComboSemDesconto}
+						span.preco-por Por:
+						span.preco-cifrao   R$
+						
+					div.preco.desconto.inteiro #{comboBlockData.valorComboComDescontoInteiro}
+					div.preco.desconto.decimal ,#{comboBlockData.valorComboComDescontoDecimal}
+					div.preco-anual anual
+		<!-- Combo Block -->

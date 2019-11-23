@@ -13,7 +13,7 @@ public class HeaderData extends AbstractPropertyExtractor {
 	}
 
 	public String getHeaderLogo() {
-		return getClass().getResource("/reports/assets/LogoBB.png").toString();
+		return getClass().getResource("/reports/images/LogoBB.png").toString();
 
 	}
 

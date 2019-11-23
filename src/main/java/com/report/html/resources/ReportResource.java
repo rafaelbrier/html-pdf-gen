@@ -51,13 +51,15 @@ public class ReportResource {
 		parameters.put("books", books);
 
 		JadeConfiguration jadeConfig = getJadeConfiguration();
-		String html = jadeConfig.renderTemplate(jadeConfig.getTemplate("page1.jade"), parameters);
+		String html = jadeConfig.renderTemplate(jadeConfig.getTemplate("report.jade"), parameters);
 		String unescapedHtml = StringEscapeUtils.unescapeHtml4(html);
 		buildAndExportPdf(response, unescapedHtml, FILE_NAME);
 	}
 
 	private void setBasicParameters(Map<String, Object> parameters) {
-		parameters.put("commonStyleSheet", getClass().getResource("/reports/assets/common.css").toString());
+		/** Import StylesSheets */
+		parameters.put("commonStyleSheet", getClass().getResource("/reports/styles/common.css").toString());
+		parameters.put("firstPageStyleSheet", getClass().getResource("/reports/styles/firstPage.css").toString());
 		parameters.put("pdfName", FILE_NAME);
 	}
 
