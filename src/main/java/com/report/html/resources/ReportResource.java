@@ -22,10 +22,10 @@ import com.report.html.datasources.FooterData;
 import com.report.html.datasources.HeaderData;
 import com.report.html.datasources.SimulacaoBlockData;
 import com.report.html.models.Book;
+import com.report.html.utils.JadeTemplateLoader;
 
 import de.neuland.jade4j.Jade4J.Mode;
 import de.neuland.jade4j.JadeConfiguration;
-import de.neuland.jade4j.template.FileTemplateLoader;
 import de.neuland.jade4j.template.TemplateLoader;
 
 @Controller
@@ -51,7 +51,7 @@ public class ReportResource {
 		parameters.put("books", books);
 
 		JadeConfiguration jadeConfig = getJadeConfiguration();
-		String html = jadeConfig.renderTemplate(jadeConfig.getTemplate("report.jade"), parameters);
+		String html = jadeConfig.renderTemplate(jadeConfig.getTemplate("report"), parameters);
 		String unescapedHtml = StringEscapeUtils.unescapeHtml4(html);
 		buildAndExportPdf(response, unescapedHtml, FILE_NAME);
 	}
@@ -101,7 +101,7 @@ public class ReportResource {
 
 	private JadeConfiguration getJadeConfiguration() {
 		JadeConfiguration jadeConfig = new JadeConfiguration();
-		TemplateLoader loader = new FileTemplateLoader(getClass().getResource("/reports/templates/").getPath(),
+		TemplateLoader loader = new JadeTemplateLoader(ReportResource.class, "reports/templates/",
 				StandardCharsets.UTF_8.name());
 		jadeConfig.setTemplateLoader(loader);
 		jadeConfig.setPrettyPrint(true);

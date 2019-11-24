@@ -29,19 +29,19 @@
 }
 .combo-box .preco-container .preco .total {
 	color: #757575;
-	line-heiht: 12px;
+	line-height: 12px;
 	font-size: 14px;
 }
 .combo-box .preco-container .preco .preco-por {
 	margin-left: 10px;
 	color: #757575;
-	line-heiht: 14px;
+	line-height: 14px;
 	font-size: 16px;
 }
 .combo-box .preco-container .preco .preco-cifrao {
 	margin-right: -5px;
 	color: #033656;
-	line-heiht: 24px;
+	line-height: 24px;
 	font-size: 24px;
 }
 .combo-box .preco-container .desconto {
